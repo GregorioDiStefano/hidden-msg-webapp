@@ -58,8 +58,8 @@
                             $scope.encode_result_view = true;
                             $scope.encode.image_data = response["data"]["encoded_images"][0]
                     },
-                    function(response) { // optional
-                            $scope.result = "Failed! :("
+                    function(response) {
+                            $scope.result = "failed! :("
                     });
                 }
                 $scope.Image.update = function(itm){

@@ -87,6 +87,18 @@
     margin-top: 20px
 }
 
+#moreinfo {
+    text-align: center;
+    font-size: 21px;
+}
+
+#encode_result_view {
+    margin-top: 60px;
+}
+
+details > p {
+    line-height: 12px;
+}
 
 textarea[name=payload] {
     margin: 50px 0px 20px 0px;
