@@ -5,7 +5,7 @@
                 $scope.hide_encode = true;
                 $scope.decode_view = false;
                 $scope.Data = {}
-                $scope.myData = {};
+                $scope.encode = {};
                 $scope.Image = {};
 
                 $scope.ValidRegex = function () {
@@ -40,7 +40,7 @@
                 }
 
 
-                $scope.myData.doClick = function(event) {
+                $scope.encode.doClick = function(event) {
 
                     $http({
                         url: '/api',
@@ -56,7 +56,7 @@
                     .then(function(response) {
                             $scope.encode_view = false;
                             $scope.encode_result_view = true;
-                            $scope.myData.image_data = response["data"]["encoded_images"][0]
+                            $scope.encode.image_data = response["data"]["encoded_images"][0]
                     },
                     function(response) { // optional
                             $scope.result = "Failed! :("

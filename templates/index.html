@@ -21,7 +21,7 @@
                 <textarea name="payload"  ng-model="Data.payload" required></textarea>
                 <br>
                 <span ng-show="!ValidRegex()" class="highlight bad">Please enter base64 encoded data to hide in images!</span>
-                <div ng-click="myData.doClick($event)">
+                <div ng-click="encode.doClick($event)">
                     <a href="#" class="button" id="encode-button">encode image</a>
                 </div>
             </form>
@@ -30,10 +30,14 @@
 
         <div ng-show="decode_view" id="decode_view">
             <p> This is decode view </p>
+
+            <div ng-click="decode.doClick($event)">
+                <a href="#" class="button" id="decode-button">decode image</a>
+            </div>
         </div>
 
         <div ng-show="encode_result_view" id="encode_result_view">
-            <img ng-src="/static/img/{{myData.image_data|angular}}" alt="Description" />
+            <img ng-src="/static/img/{{encode.image_data|angular}}" alt="Description" />
         </div>
 </div>
 
