@@ -1,0 +1,50 @@
+.highlight {
+    opacity: 0.80;
+    color: black;
+    padding: 5px;
+    border-radius: 13px;
+    font-size: 17px;
+}
+
+.bad {
+    background-color: #F9767F;
+}
+
+.good {
+    background-color: #86F18A;
+}
+
+#big_option {
+    text-align: center;
+    font-size: 72px;
+}
+
+#encode {
+    color: green;
+}
+
+#decode {
+    color: red;
+}
+
+#encode_view {
+    text-align: center;
+}
+
+#decode_view {
+    text-align: center;
+}
+
+#encode_result_view {
+    text-align: center;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+textarea[name=payload] {
+    margin: 50px 0px 20px 0px;
+    width: 70%;
+    height: 290px;
+}

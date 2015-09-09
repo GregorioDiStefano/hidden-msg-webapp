@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="/static/js/app.js"></script>
+    </head>
+<body ng-app="hm">
+
+<div ng-controller="MyController" >
+<p id="big_option">Do you want to <span id="encode" class="underline" ng-click="show_encode()">encode</span> or <span ng-click="show_decode()" id="decode" class="underline">decode</span> an image?</p>
+        <div ng-show="encode_view" id="encode_view">
+            <form name="options">
+                <br> Pick a subreddit to use images from:
+                <select ng-model="Image.id" ng-change="Image.update(Image.id)" ng-options="i.name as i.name for i in images"></select>
+                <br>
+                <textarea name="payload"  ng-model="Data.payload" required></textarea>
+                <br>
+                <span ng-show="!ValidRegex()" class="highlight bad">Please enter base64 encoded data to hide in images!</span>
+                <span ng-show="ValidRegex()" class="highlight good" type="hidden">Good!</span>
+                <div ng-click="myData.doClick($event)">Hidden message</div>
+            </form>
+            <h1>{{result|angular}}</h1>
+        </div>
+
+        <div ng-show="decode_view" id="decode_view">
+            <p> This is decode view </p>
+        </div>
+
+        <div ng-show="encode_result_view" id="encode_result_view">
+            <img ng-src="/static/img/{{myData.image_data|angular}}" alt="Description" />
+        </div>
+</div>
+
+
+
+</body>
+</html>
+
