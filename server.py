@@ -29,16 +29,20 @@ def img_posted():
 
         random_suffix = str(uuid.uuid4().get_hex().upper()[0:12])
         tmpdir = tempfile.mkdtemp(dir="uploaded_images")
-        resp = Response(status=200)
 
         file = request.files["file"]
         filename = secure_filename(random_suffix + "." + file.filename)
         file.save(tmpdir + "/" + filename)
 
-        hm = hiddenmsg.Decode(images_dir=tmpdir + "/")
-        print hm.get_data()
+        try:
+            hm = hiddenmsg.Decode(images_dir=tmpdir + "/")
+            decoded_data = hm.get_data()
+        except ValueError:
+            return Response(status=500, response="Are you sure this file is encoded with data?")
+        except Exception:
+            return Response(status=500, response="Ooops, something went wrong!")
 
-        return resp
+        return Response(status=200, response=decoded_data)
 
 
 @app.route('/api', methods=['POST', 'GET'])

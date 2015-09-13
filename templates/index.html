@@ -45,12 +45,14 @@
             <h1>{{result|angular}}</h1>
         </div>
 
-        <div ng-show="decode_view" id="decode_view">
-
-
-        <div ng-controller="DzController" class="dropzone" dropzone="dropzoneConfig">
+        <div ng-show="decode_result" id="decode_result" class="center">
+            <textarea> {{decode_payload|angular}}</textarea>
         </div>
 
+        <div ng-show="decode_view" id="decode_view">
+
+            <div class="dropzone center" dropzone="dropzoneConfig">
+            </div>
 
             <div ng-click="decode.doClick($event)">
                 <a href="#" class="button" id="decode-button">decode image</a>

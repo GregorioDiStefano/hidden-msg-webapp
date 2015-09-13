@@ -15,11 +15,19 @@ angular.module('dropzone', []).directive('dropzone', function () {
 });
 
 
-angular.module('hm', ['dropzone']);
+angular.module('hm', ['dropzone'])
+            .controller("MyController", function($scope,  $http) {
 
-    angular.module("hm")
-            .controller("DzController", function($scope, $http) {
+                $scope.got_response = false;
+                $scope.hide_encode = true;
+                $scope.decode_view = false;
+                $scope.decode_result = false;
+
+                $scope.Data = {}
+                $scope.encode = {};
+                $scope.Image = {};
                 $scope.dz = {}
+
                 $scope.dropzoneConfig = {
                     'options': {
                         "maxFilesize" : "5",
@@ -36,31 +44,15 @@ angular.module('hm', ['dropzone']);
 
                         },
                         'success': function (file, response) {
-                            alert("Success!")
+                            $scope.decode_payload = response
+                            $scope.show_decode_result()
                         }
                     }
                 };
 
-
                 $scope.$on('removeFiles', function(event) {
                     $scope.dz.removeAllFiles(true);
                 });
-
-            })
-
-
-
-
-
-            .controller("MyController", function($scope,  $http) {
-
-                $scope.got_response = false;
-                $scope.hide_encode = true;
-                $scope.decode_view = false;
-                $scope.Data = {}
-                $scope.encode = {};
-                $scope.Image = {};
-
 
                 $scope.ValidRegex = function () {
                     if ($scope.Data.payload == undefined)
@@ -85,13 +77,20 @@ angular.module('hm', ['dropzone']);
                     $scope.encode_view = true;
                     $scope.decode_view = false;
                     $scope.encode_result_view = false;
+                    $scope.decode_result = false;
                 }
 
                 $scope.show_decode = function() {
                     $scope.encode_view = false;
                     $scope.decode_view = true;
                     $scope.encode_result_view = false;
+                    $scope.decode_result = false;
                     $scope.$broadcast('removeFiles');
+                }
+
+                $scope.show_decode_result = function() {
+                    $scope.decode_result = true
+                    $scope.decode_view = false
                 }
 
 

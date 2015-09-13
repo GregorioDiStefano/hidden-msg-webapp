@@ -96,14 +96,18 @@
     margin-top: 60px;
 }
 
-/*#decode_view_dropzone {
-//    border: 2px dashed #0087F7;
-//    min-height: 100px;
-//    width: 60%;
-//    margin-top: 50px;
-//    margin-bottom: 50px;
+#decode_result {
+    text-align: center;
 }
-*/
+
+.dropzone {
+    border: 2px dashed #0087F7;
+    min-height: 100px;
+    width: 60%;
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+}
+
 
 .center {
     width: 50%;
@@ -114,7 +118,7 @@ details > p {
     line-height: 12px;
 }
 
-textarea[name=payload] {
+textarea {
     margin: 50px 0px 20px 0px;
     width: 70%;
     height: 290px;
