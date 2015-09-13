@@ -18,8 +18,8 @@ angular.module('dropzone', []).directive('dropzone', function () {
 angular.module('hm', ['dropzone']);
 
     angular.module("hm")
-            .controller("SomeCtrl", function($scope, $http) {
-
+            .controller("DzController", function($scope, $http) {
+                $scope.dz = {}
                 $scope.dropzoneConfig = {
                     'options': {
                         "maxFilesize" : "5",
@@ -27,6 +27,9 @@ angular.module('hm', ['dropzone']);
                         "uploadMultiple" : false,
                         "url": '/img/post',
                         "maxFiles" : 1,
+                        init: function(){
+                            $scope.dz = this;
+                        },
                     },
                     'eventHandlers': {
                         'sending': function (file, xhr, formData) {
@@ -37,7 +40,17 @@ angular.module('hm', ['dropzone']);
                         }
                     }
                 };
+
+
+                $scope.$on('removeFiles', function(event) {
+                    $scope.dz.removeAllFiles(true);
+                });
+
             })
+
+
+
+
 
             .controller("MyController", function($scope,  $http) {
 
@@ -78,6 +91,7 @@ angular.module('hm', ['dropzone']);
                     $scope.encode_view = false;
                     $scope.decode_view = true;
                     $scope.encode_result_view = false;
+                    $scope.$broadcast('removeFiles');
                 }
 
 

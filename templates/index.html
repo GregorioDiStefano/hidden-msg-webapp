@@ -10,7 +10,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="/static/js/app.js"></script>
         <script src="/static/js/dropzone.js"></script>
-        <script src="/static/js/fileAppDirectives.js"></script>
         <script>
             Dropzone.autoDiscover = false;
         </script>
@@ -49,7 +48,7 @@
         <div ng-show="decode_view" id="decode_view">
 
 
-        <div ng-controller="SomeCtrl" class="dropzone" dropzone="dropzoneConfig">
+        <div ng-controller="DzController" class="dropzone" dropzone="dropzoneConfig">
         </div>
 
 
