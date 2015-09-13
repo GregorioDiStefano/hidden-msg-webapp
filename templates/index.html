@@ -4,10 +4,17 @@
         <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/css/dropzone.css">
         <link rel="stylesheet" href="static/css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="/static/js/app.js"></script>
+        <script src="/static/js/dropzone.js"></script>
+        <script src="/static/js/fileAppDirectives.js"></script>
+        <script>
+            Dropzone.autoDiscover = false;
+        </script>
+
     </head>
 <body ng-app="hm">
 
@@ -40,7 +47,11 @@
         </div>
 
         <div ng-show="decode_view" id="decode_view">
-            <p> This is decode view </p>
+
+
+        <div ng-controller="SomeCtrl" class="dropzone" dropzone="dropzoneConfig">
+        </div>
+
 
             <div ng-click="decode.doClick($event)">
                 <a href="#" class="button" id="decode-button">decode image</a>
@@ -51,8 +62,6 @@
             <img ng-src="/static/img/{{encode.image_data|angular}}" alt="Description" />
         </div>
 </div>
-
-
 
 </body>
 </html>

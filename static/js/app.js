@@ -1,4 +1,44 @@
-    angular.module("hm", [])
+angular.module('dropzone', []).directive('dropzone', function () {
+  return function (scope, element, attrs) {
+    var config, dropzone;
+
+    config = scope[attrs.dropzone];
+
+    // create a Dropzone for the element with the given options
+    dropzone = new Dropzone(element[0], config.options);
+
+    // bind the given event handlers
+    angular.forEach(config.eventHandlers, function (handler, event) {
+      dropzone.on(event, handler);
+    });
+  };
+});
+
+
+angular.module('hm', ['dropzone']);
+
+    angular.module("hm")
+            .controller("SomeCtrl", function($scope, $http) {
+
+                $scope.dropzoneConfig = {
+                    'options': {
+                        "maxFilesize" : "5",
+                        "acceptedFiles" : "image/*",
+                        "uploadMultiple" : false,
+                        "url": '/img/post',
+                        "maxFiles" : 1,
+                    },
+                    'eventHandlers': {
+                        'sending': function (file, xhr, formData) {
+
+                        },
+                        'success': function (file, response) {
+                            alert("Success!")
+                        }
+                    }
+                };
+            })
+
             .controller("MyController", function($scope,  $http) {
 
                 $scope.got_response = false;
@@ -7,6 +47,7 @@
                 $scope.Data = {}
                 $scope.encode = {};
                 $scope.Image = {};
+
 
                 $scope.ValidRegex = function () {
                     if ($scope.Data.payload == undefined)
@@ -65,4 +106,8 @@
                 $scope.Image.update = function(itm){
 
                 }
-            } );
+            }
+ );
+
+
+

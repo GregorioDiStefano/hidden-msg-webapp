@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, redirect, send_from_directory, \
-    render_template, session, send_file
+    render_template, session, send_file, Response
 import logging
 from flask.ext.triangle import Triangle
 import hiddenmsg
@@ -17,6 +17,13 @@ def send_static(path):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/img/post', methods=['POST', 'GET'])
+def img_posted():
+    if request.method == 'POST':
+        resp = Response(status=200)
+        print request.files #Bug fix : https://github.com/mitsuhiko/flask/issues/904
+        return resp
 
 
 @app.route('/api', methods=['POST', 'GET'])

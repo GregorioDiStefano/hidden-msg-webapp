@@ -96,6 +96,20 @@
     margin-top: 60px;
 }
 
+/*#decode_view_dropzone {
+//    border: 2px dashed #0087F7;
+//    min-height: 100px;
+//    width: 60%;
+//    margin-top: 50px;
+//    margin-bottom: 50px;
+}
+*/
+
+.center {
+    width: 50%;
+    margin: 0 auto;
+}
+
 details > p {
     line-height: 12px;
 }
