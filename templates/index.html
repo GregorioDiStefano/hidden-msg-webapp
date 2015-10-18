@@ -16,9 +16,8 @@
 
     </head>
 <body ng-app="hm">
+<h1 class="logo center">PNG Steganography</h1>
 
-<div ng-controller="MyController" >
-<p id="big_option">Do you want to <span id="encode" class="underline" ng-click="show_encode()">encode</span> or <span ng-click="show_decode()" id="decode" class="underline">decode</span> an image?</p>
 
         <div id="moreinfo">
             <details>
@@ -30,14 +29,19 @@
             </details>
         </div>
 
+<div ng-controller="MyController" >
+<p id="big_option"> <span id="encode" class="underline" ng-click="show_encode()">Encode</span> or <span ng-click="show_decode()" id="decode" class="underline">Decode</span></p>
+
+
+
         <div ng-show="encode_view" id="encode_view">
             <form name="options">
                 <br> Pick a subreddit to use images from:
-                <select ng-model="Image.id" ng-change="Image.update(Image.id)" ng-options="i.name as i.name for i in images"></select>
+                <select ng-init="Image.id = options[0]" ng-model="Image.id" ng-change="Image.update(Image.id)" ng-options="i.subreddit as i.subreddit for i in images"></select>
                 <br>
-                <textarea name="payload"  ng-model="Data.payload" required></textarea>
+                <textarea name="payload" placeholder="Paste your base64 here" ng-model="Data.payload" required></textarea>
                 <br>
-                <span ng-show="!ValidRegex()" class="highlight bad">Please enter valid (encrypted?) base64 encoded data to hide in images!</span>
+                <span ng-show="!ValidRegex()" class="highlight bad">Please enter valid base64 encoded data to hide in images!</span>
                 <div ng-click="encode.doClick($event)">
                     <a href="#" class="button" id="encode-button">encode image</a>
                 </div>

@@ -16,14 +16,16 @@
 
 #big_option {
     text-align: center;
-    font-size: 72px;
+    font-size: 50px;
 }
 
 #encode {
+    cursor: pointer;
     color: green;
 }
 
 #decode {
+    cursor: pointer;
     color: red;
 }
 
@@ -112,6 +114,29 @@
 .center {
     width: 50%;
     margin: 0 auto;
+}
+
+
+.logo {
+    text-align: center;
+    width: 23%;
+
+    padding-bottom: 40px;
+    padding-top: 40px;
+    font-size: 52px;
+
+
+
+    -moz-box-shadow: 9px  7px  5px  #000000;
+    -webkit-box-shadow: 9px  7px  5px  #000000;
+    box-shadow: 9px  7px  5px  #000000;
+
+    background-color: #F6FAFF;
+}
+
+
+body {
+    background-color: white;
 }
 
 details > p {

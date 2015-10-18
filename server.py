@@ -8,10 +8,16 @@ import shutil
 import tempfile
 from werkzeug import secure_filename
 import uuid
+import os
+import glob
+import random
 
 app = Flask(__name__, static_url_path='')
 logger = logging.getLogger()
 Triangle(app)
+
+image_dir = "images/"
+image_subreddits = ["aww", "botanicalporn", "earthporn", "norwaypics"]
 
 @app.route('/static/<path:path>')
 def send_static(path):
@@ -47,10 +53,27 @@ def img_posted():
 
 @app.route('/api', methods=['POST', 'GET'])
 def api():
+    if request.method == 'GET':
+        action = request.args.get('action', '')
+        if action == "image_sources":
+            image_sources = []
+            for idx, item in enumerate(image_subreddits):
+                if os.path.isdir(image_dir + item):
+                    image_sources.append({ "id" : idx, "subreddit" : item })
+                else:
+                    logging.critical("%s directory does not exist" % (image_dir + item))
+            return jsonify({"images" : image_sources})
+
     if request.method == 'POST':
+
+        subreddit = request.get_json()["subreddit"]
         msg_b64 = request.get_json()["message"]
-        #msg = base64.b64decode(msg_b64)
-        e = hiddenmsg.Encode(base64_data = msg_b64)#, output_dir="/home/greg/Desktop/projects/hidden-msg-webapp/encoded/", images_to_encode="/home/greg/Desktop/projects/hidden-msg-webapp/images/")
+
+        image = glob.glob(image_dir + subreddit + "/*")
+        random.shuffle(image)
+        image = image[0:10]
+
+        e = hiddenmsg.Encode(base64_data = msg_b64, images_to_encode=image)#, output_dir="/home/greg/Desktop/projects/hidden-msg-webapp/encoded/", images_to_encode="/home/greg/Desktop/projects/hidden-msg-webapp/images/")
         encoded_images = e.encode()
         for i in encoded_images:
             shutil.copy2('encoded/' + i, 'static/img/')

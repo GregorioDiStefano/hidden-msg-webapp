@@ -28,6 +28,7 @@ angular.module('hm', ['dropzone'])
                 $scope.Image = {};
                 $scope.dz = {}
 
+
                 $scope.dropzoneConfig = {
                     'options': {
                         "maxFilesize" : "5",
@@ -62,15 +63,11 @@ angular.module('hm', ['dropzone'])
                         return true
                 };
 
-                $scope.images = [
-                {
-                    "id": 0,
-                    "name": "Earth porn"
-                },
-                {
-                    "id": 1,
-                    "name": "NorwayPics"
-                }]
+                $http.get('api?action=image_sources')
+                       .then(function(res){
+                            console.log(res.data, res.data.images)
+                          $scope.images = res.data["images"];
+                });
 
                 $scope.show_encode = function() {
                     $scope.got_response = false;
@@ -93,13 +90,12 @@ angular.module('hm', ['dropzone'])
                     $scope.decode_view = false
                 }
 
-
                 $scope.encode.doClick = function(event) {
 
                     $http({
                         url: '/api',
                         method: "POST",
-                        data: { 'message' : $scope.Data.payload, 'image' : $scope.Image.id}
+                        data: { 'message' : $scope.Data.payload, 'subreddit' : $scope.Image.id}
                     })
                     .success(function(data, status, headers, config){
                         if (data.result){
